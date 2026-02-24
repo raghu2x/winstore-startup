@@ -1,0 +1,25 @@
+{
+  "name": "winstore-startup",
+  "version": "1.0.0",
+  "description": "Windows Store startup task management using C++/WinRT",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": {
+    "email": "raghvendraa.dev@gmail.com",
+    "name": "Raghvendra Yadav"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "build": "node-gyp rebuild",
+    "clean": "node-gyp clean"
+  },
+  "dependencies": {
+    "node-addon-api": "^8.5.0",
+    "node-gyp": "^12.2.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "os": ["win32"],
+  "cpu": ["x64", "arm64"]
+}
