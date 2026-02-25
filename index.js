@@ -1,5 +1,3 @@
-const path = require('path');
-
 let binding;
 
 try {
@@ -7,10 +5,10 @@ try {
 } catch (e) {
   // Fallback for development or non-Windows platforms
   binding = {
-    enable: () => -1,
-    disable: () => {},
-    getState: () => -1,
-    getForCurrentPackage: () => []
+    enable: () => Promise.reject(new Error('Not supported on this platform')),
+    disable: () => Promise.reject(new Error('Not supported on this platform')),
+    getState: () => Promise.reject(new Error('Not supported on this platform')),
+    getForCurrentPackage: () => Promise.resolve([])
   };
 }
 
@@ -27,22 +25,23 @@ const StartupTaskState = {
 
 /**
  * Get the first task ID from the current package
- * @returns {string|null}
+ * @returns {Promise<string|null>}
  */
-function getFirstTaskId() {
-  const tasks = binding.getForCurrentPackage();
+async function getFirstTaskId() {
+  const tasks = await binding.getForCurrentPackage();
   return tasks.length > 0 ? tasks[0].taskId : null;
 }
 
 /**
  * Enable a startup task
  * @param {string} [taskId] - The startup task ID (optional, uses first task if not provided)
- * @returns {number} The resulting state
+ * @returns {Promise<number>} The resulting state
+ * @throws {Error} If no startup task is found or operation fails
  */
-function enable(taskId) {
-  const id = taskId || getFirstTaskId();
+async function enable(taskId) {
+  const id = taskId || await getFirstTaskId();
   if (!id) {
-    return -1;
+    throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
   }
   return binding.enable(id);
 }
@@ -50,11 +49,13 @@ function enable(taskId) {
 /**
  * Disable a startup task
  * @param {string} [taskId] - The startup task ID (optional, uses first task if not provided)
+ * @returns {Promise<void>}
+ * @throws {Error} If no startup task is found or operation fails
  */
-function disable(taskId) {
-  const id = taskId || getFirstTaskId();
+async function disable(taskId) {
+  const id = taskId || await getFirstTaskId();
   if (!id) {
-    return;
+    throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
   }
   return binding.disable(id);
 }
@@ -62,19 +63,29 @@ function disable(taskId) {
 /**
  * Get state of a startup task
  * @param {string} [taskId] - The startup task ID (optional, uses first task if not provided)
- * @returns {number} The current state
+ * @returns {Promise<number>} The current state
+ * @throws {Error} If no startup task is found or operation fails
  */
-function getState(taskId) {
-  const id = taskId || getFirstTaskId();
+async function getState(taskId) {
+  const id = taskId || await getFirstTaskId();
   if (!id) {
-    return -1;
+    throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
   }
   return binding.getState(id);
+}
+
+/**
+ * Get all startup tasks for the current package
+ * @returns {Promise<Array<{taskId: string, state: number}>>}
+ */
+async function getForCurrentPackage() {
+  return binding.getForCurrentPackage();
 }
 
 module.exports = {
   enable,
   disable,
   getState,
+  getForCurrentPackage,
   StartupTaskState
 };

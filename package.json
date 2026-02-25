@@ -4,6 +4,22 @@
   "description": "Windows Store startup task management using C++/WinRT",
   "main": "index.js",
   "types": "index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aspect-dev/winstore-startup.git"
+  },
+  "keywords": [
+    "windows",
+    "startup",
+    "uwp",
+    "winrt",
+    "windows-store",
+    "autostart",
+    "native",
+    "addon",
+    "startup-task"
+  ],
   "author": {
     "email": "raghvendraa.dev@gmail.com",
     "name": "Raghvendra Yadav"
@@ -14,7 +30,9 @@
     "clean": "node-gyp clean"
   },
   "dependencies": {
-    "node-addon-api": "^8.5.0",
+    "node-addon-api": "^8.5.0"
+  },
+  "devDependencies": {
     "node-gyp": "^12.2.0"
   },
   "engines": {
