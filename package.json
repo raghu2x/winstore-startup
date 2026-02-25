@@ -5,6 +5,12 @@
   "main": "index.js",
   "types": "index.d.ts",
   "license": "MIT",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "startup_task.cpp",
+    "binding.gyp"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/aspect-dev/winstore-startup.git"
