@@ -42,7 +42,10 @@
     "build": "node-gyp rebuild",
     "clean": "node-gyp clean",
     "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check"
+    "fmt:check": "oxfmt --check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "node-addon-api": "^8.5.0"
@@ -50,7 +53,8 @@
   "devDependencies": {
     "node-gyp": "^12.2.0",
     "oxfmt": "^0.36.0",
-    "oxlint": "^1.51.0"
+    "oxlint": "^1.51.0",
+    "vitest": "^4.0.18"
   },
   "engines": {
     "node": ">=20.0.0"

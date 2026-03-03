@@ -1,16 +1,4 @@
-let binding;
-
-try {
-  binding = require('./build/Release/winstore_startup.node');
-} catch (e) {
-  // Fallback for development or non-Windows platforms
-  binding = {
-    enable: () => Promise.reject(new Error('Not supported on this platform')),
-    disable: () => Promise.reject(new Error('Not supported on this platform')),
-    getState: () => Promise.reject(new Error('Not supported on this platform')),
-    getForCurrentPackage: () => Promise.resolve([]),
-  };
-}
+const binding = require('./lib/binding.js');
 
 /**
  * Startup task states
