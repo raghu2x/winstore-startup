@@ -2,48 +2,57 @@
   "name": "winstore-startup",
   "version": "1.0.0",
   "description": "Windows Store startup task management using C++/WinRT",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "keywords": [
+    "addon",
+    "autostart",
+    "native",
+    "startup",
+    "startup-task",
+    "uwp",
+    "windows",
+    "windows-store",
+    "winrt"
+  ],
   "license": "MIT",
+  "author": {
+    "name": "Raghvendra Yadav",
+    "email": "raghvendraa.dev@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aspect-dev/winstore-startup.git"
+  },
   "files": [
     "index.js",
     "index.d.ts",
     "startup_task.cpp",
     "binding.gyp"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aspect-dev/winstore-startup.git"
-  },
-  "keywords": [
-    "windows",
-    "startup",
-    "uwp",
-    "winrt",
-    "windows-store",
-    "autostart",
-    "native",
-    "addon",
-    "startup-task"
+  "os": [
+    "win32"
   ],
-  "author": {
-    "email": "raghvendraa.dev@gmail.com",
-    "name": "Raghvendra Yadav"
-  },
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "install": "node-gyp rebuild",
     "build": "node-gyp rebuild",
-    "clean": "node-gyp clean"
+    "clean": "node-gyp clean",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
   },
   "dependencies": {
     "node-addon-api": "^8.5.0"
   },
   "devDependencies": {
-    "node-gyp": "^12.2.0"
+    "node-gyp": "^12.2.0",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0"
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "os": ["win32"],
-  "cpu": ["x64", "arm64"]
+  }
 }

@@ -3,7 +3,7 @@ export enum StartupTaskState {
   DisabledByUser = 1,
   Enabled = 2,
   DisabledByPolicy = 3,
-  EnabledByPolicy = 4
+  EnabledByPolicy = 4,
 }
 
 export interface StartupTaskInfo {

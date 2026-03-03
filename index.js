@@ -8,7 +8,7 @@ try {
     enable: () => Promise.reject(new Error('Not supported on this platform')),
     disable: () => Promise.reject(new Error('Not supported on this platform')),
     getState: () => Promise.reject(new Error('Not supported on this platform')),
-    getForCurrentPackage: () => Promise.resolve([])
+    getForCurrentPackage: () => Promise.resolve([]),
   };
 }
 
@@ -20,7 +20,7 @@ const StartupTaskState = {
   DisabledByUser: 1,
   Enabled: 2,
   DisabledByPolicy: 3,
-  EnabledByPolicy: 4
+  EnabledByPolicy: 4,
 };
 
 /**
@@ -39,7 +39,7 @@ async function getFirstTaskId() {
  * @throws {Error} If no startup task is found or operation fails
  */
 async function enable(taskId) {
-  const id = taskId || await getFirstTaskId();
+  const id = taskId || (await getFirstTaskId());
   if (!id) {
     throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
   }
@@ -53,7 +53,7 @@ async function enable(taskId) {
  * @throws {Error} If no startup task is found or operation fails
  */
 async function disable(taskId) {
-  const id = taskId || await getFirstTaskId();
+  const id = taskId || (await getFirstTaskId());
   if (!id) {
     throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
   }
@@ -67,7 +67,7 @@ async function disable(taskId) {
  * @throws {Error} If no startup task is found or operation fails
  */
 async function getState(taskId) {
-  const id = taskId || await getFirstTaskId();
+  const id = taskId || (await getFirstTaskId());
   if (!id) {
     throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
   }
@@ -87,5 +87,5 @@ module.exports = {
   disable,
   getState,
   getForCurrentPackage,
-  StartupTaskState
+  StartupTaskState,
 };
