@@ -1,4 +1,4 @@
-const binding = require('./lib/binding.js');
+const binding = global.__WINSTORE_STARTUP_MOCK_BINDING__ || require('node-gyp-build')(__dirname);
 
 /**
  * Startup task states

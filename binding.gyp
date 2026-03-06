@@ -18,6 +18,7 @@
                 "ExceptionHandling": 1
               }
             },
+            "msvs_version": "auto",
             "libraries": ["windowsapp.lib"]
           }
         ]

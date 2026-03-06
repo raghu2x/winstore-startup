@@ -1,2 +1,6 @@
 build/
 node_modules/
+prebuilds/
+coverage/
+*.tsbuildinfo
+.DS_Store
