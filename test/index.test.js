@@ -112,9 +112,7 @@ describe('winstore-startup', () => {
     });
 
     it('should use first task when taskId not provided', async () => {
-      mockBinding.getForCurrentPackage.mockResolvedValue([
-        { taskId: 'first-task', state: 2 },
-      ]);
+      mockBinding.getForCurrentPackage.mockResolvedValue([{ taskId: 'first-task', state: 2 }]);
       mockBinding.disable.mockResolvedValue(undefined);
 
       await startup.disable();
@@ -142,9 +140,7 @@ describe('winstore-startup', () => {
     });
 
     it('should use first task when taskId not provided', async () => {
-      mockBinding.getForCurrentPackage.mockResolvedValue([
-        { taskId: 'first-task', state: 1 },
-      ]);
+      mockBinding.getForCurrentPackage.mockResolvedValue([{ taskId: 'first-task', state: 1 }]);
       mockBinding.getState.mockResolvedValue(1);
 
       const result = await startup.getState();
@@ -179,25 +175,13 @@ describe('winstore-startup', () => {
 
   describe('fallback behavior (simulated)', () => {
     it('should handle platform error from binding', async () => {
-      mockBinding.enable.mockRejectedValue(
-        new Error('Not supported on this platform'),
-      );
-      mockBinding.disable.mockRejectedValue(
-        new Error('Not supported on this platform'),
-      );
-      mockBinding.getState.mockRejectedValue(
-        new Error('Not supported on this platform'),
-      );
+      mockBinding.enable.mockRejectedValue(new Error('Not supported on this platform'));
+      mockBinding.disable.mockRejectedValue(new Error('Not supported on this platform'));
+      mockBinding.getState.mockRejectedValue(new Error('Not supported on this platform'));
 
-      await expect(startup.enable('task')).rejects.toThrow(
-        'Not supported on this platform',
-      );
-      await expect(startup.disable('task')).rejects.toThrow(
-        'Not supported on this platform',
-      );
-      await expect(startup.getState('task')).rejects.toThrow(
-        'Not supported on this platform',
-      );
+      await expect(startup.enable('task')).rejects.toThrow('Not supported on this platform');
+      await expect(startup.disable('task')).rejects.toThrow('Not supported on this platform');
+      await expect(startup.getState('task')).rejects.toThrow('Not supported on this platform');
     });
 
     it('should return empty array for getForCurrentPackage on unsupported platform', async () => {

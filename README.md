@@ -120,7 +120,13 @@ async function listTasks() {
 ### TypeScript
 
 ```typescript
-import { enable, disable, getState, getForCurrentPackage, StartupTaskState } from 'winstore-startup';
+import {
+  enable,
+  disable,
+  getState,
+  getForCurrentPackage,
+  StartupTaskState,
+} from 'winstore-startup';
 
 async function manageStartup(): Promise<void> {
   try {

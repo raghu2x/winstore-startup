@@ -29,7 +29,9 @@ async function getFirstTaskId() {
 async function enable(taskId) {
   const id = taskId || (await getFirstTaskId());
   if (!id) {
-    throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
+    throw new Error(
+      'No startup task found. Ensure your app manifest includes a startup task declaration.',
+    );
   }
   return binding.enable(id);
 }
@@ -43,7 +45,9 @@ async function enable(taskId) {
 async function disable(taskId) {
   const id = taskId || (await getFirstTaskId());
   if (!id) {
-    throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
+    throw new Error(
+      'No startup task found. Ensure your app manifest includes a startup task declaration.',
+    );
   }
   return binding.disable(id);
 }
@@ -57,7 +61,9 @@ async function disable(taskId) {
 async function getState(taskId) {
   const id = taskId || (await getFirstTaskId());
   if (!id) {
-    throw new Error('No startup task found. Ensure your app manifest includes a startup task declaration.');
+    throw new Error(
+      'No startup task found. Ensure your app manifest includes a startup task declaration.',
+    );
   }
   return binding.getState(id);
 }
