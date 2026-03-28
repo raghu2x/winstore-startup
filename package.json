@@ -1,6 +1,6 @@
 {
   "name": "winstore-startup",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Windows Store startup task management using C++/WinRT",
   "keywords": [
     "addon",
