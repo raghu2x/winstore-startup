@@ -1,6 +1,6 @@
 {
   "name": "winstore-startup",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Windows Store startup task management using C++/WinRT",
   "keywords": [
     "addon",
@@ -41,8 +41,7 @@
   "types": "index.d.ts",
   "scripts": {
     "install": "node-gyp-build",
-    "prebuild": "prebuildify --napi --strip",
-    "prebuild:all": "prebuildify --napi --strip --arch x64 && prebuildify --napi --strip --arch arm64",
+    "prebuild": "prebuildify --napi --strip --name node.napi",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "test": "vitest run",
