@@ -12,18 +12,6 @@ using namespace winrt;
 using namespace Windows::ApplicationModel;
 using namespace Windows::Foundation;
 
-// Initialize WinRT apartment on module load
-struct WinRTInitializer {
-  WinRTInitializer() {
-    winrt::init_apartment();
-  }
-  ~WinRTInitializer() {
-    winrt::uninit_apartment();
-  }
-};
-
-static WinRTInitializer g_winrt_init;
-
 // Startup task states (matches Windows.ApplicationModel.StartupTaskState)
 // 0 = Disabled, 1 = DisabledByUser, 2 = Enabled, 3 = DisabledByPolicy, 4 = EnabledByPolicy
 
@@ -52,12 +40,14 @@ public:
     : Napi::AsyncWorker(env), deferred_(deferred), taskId_(taskId), state_(-1) {}
 
   void Execute() override {
+    winrt::init_apartment();
     try {
       auto task = StartupTask::GetAsync(winrt::to_hstring(taskId_)).get();
       state_ = static_cast<int>(task.RequestEnableAsync().get());
     } catch (const winrt::hresult_error& e) {
       SetError(winrt::to_string(e.message()));
     }
+    winrt::uninit_apartment();
   }
 
   void OnOK() override {
@@ -81,12 +71,14 @@ public:
     : Napi::AsyncWorker(env), deferred_(deferred), taskId_(taskId) {}
 
   void Execute() override {
+    winrt::init_apartment();
     try {
       auto task = StartupTask::GetAsync(winrt::to_hstring(taskId_)).get();
       task.Disable();
     } catch (const winrt::hresult_error& e) {
       SetError(winrt::to_string(e.message()));
     }
+    winrt::uninit_apartment();
   }
 
   void OnOK() override {
@@ -109,12 +101,14 @@ public:
     : Napi::AsyncWorker(env), deferred_(deferred), taskId_(taskId), state_(-1) {}
 
   void Execute() override {
+    winrt::init_apartment();
     try {
       auto task = StartupTask::GetAsync(winrt::to_hstring(taskId_)).get();
       state_ = static_cast<int>(task.State());
     } catch (const winrt::hresult_error& e) {
       SetError(winrt::to_string(e.message()));
     }
+    winrt::uninit_apartment();
   }
 
   void OnOK() override {
@@ -143,6 +137,7 @@ public:
     : Napi::AsyncWorker(env), deferred_(deferred) {}
 
   void Execute() override {
+    winrt::init_apartment();
     try {
       auto tasks = StartupTask::GetForCurrentPackageAsync().get();
       for (auto const& task : tasks) {
@@ -154,6 +149,7 @@ public:
     } catch (const winrt::hresult_error& e) {
       SetError(winrt::to_string(e.message()));
     }
+    winrt::uninit_apartment();
   }
 
   void OnOK() override {
