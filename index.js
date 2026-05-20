@@ -1,4 +1,17 @@
-const binding = global.__WINSTORE_STARTUP_MOCK_BINDING__ || require('node-gyp-build')(__dirname);
+let binding = global.__WINSTORE_STARTUP_MOCK_BINDING__;
+
+if (!binding) {
+  try {
+    binding = require('node-gyp-build')(__dirname);
+  } catch {
+    binding = {
+      enable: () => Promise.reject(new Error('winstore-startup is only supported on Windows.')),
+      disable: () => Promise.reject(new Error('winstore-startup is only supported on Windows.')),
+      getState: () => Promise.reject(new Error('winstore-startup is only supported on Windows.')),
+      getForCurrentPackage: () => Promise.resolve([]),
+    };
+  }
+}
 
 /**
  * Startup task states

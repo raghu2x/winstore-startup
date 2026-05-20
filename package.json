@@ -1,6 +1,6 @@
 {
   "name": "winstore-startup",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Windows Store startup task management using C++/WinRT",
   "keywords": [
     "addon",
@@ -29,13 +29,6 @@
     "binding.gyp",
     "lib",
     "prebuilds"
-  ],
-  "os": [
-    "win32"
-  ],
-  "cpu": [
-    "x64",
-    "arm64"
   ],
   "main": "index.js",
   "types": "index.d.ts",
