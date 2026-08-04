@@ -1,6 +1,6 @@
 {
   "name": "winstore-startup",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Windows Store startup task management using C++/WinRT",
   "keywords": [
     "addon",
@@ -43,14 +43,14 @@
     "clean": "git clean -fx ./build ./prebuilds ./node_modules"
   },
   "dependencies": {
-    "node-addon-api": "^8.7.0",
+    "node-addon-api": "^8.9.1",
     "node-gyp-build": "^4.8.4"
   },
   "devDependencies": {
-    "oxfmt": "^0.42.0",
-    "oxlint": "^1.57.0",
+    "oxfmt": "^0.62.0",
+    "oxlint": "^1.77.0",
     "prebuildify": "^6.0.1",
-    "vitest": "^4.1.2"
+    "vitest": "^4.1.10"
   },
   "engines": {
     "node": ">=20.0.0"

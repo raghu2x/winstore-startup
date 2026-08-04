@@ -8,8 +8,12 @@ on:
 
 jobs:
   test:
-    name: Test - Windows
-    runs-on: windows-latest
+    name: Test - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v6
 
