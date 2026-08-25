@@ -11,27 +11,12 @@ concurrency:
 
 jobs:
   prebuild:
-    name: Prebuild - ${{ matrix.os }} ${{ matrix.arch }}
-    runs-on: ${{ matrix.os }}
+    name: Prebuild - windows ${{ matrix.arch }}
+    runs-on: windows-latest
     strategy:
       fail-fast: true
       matrix:
-        include:
-          # Windows (native x64 + cross-compiled arm64)
-          - os: windows-latest
-            arch: x64
-          - os: windows-latest
-            arch: arm64
-          # macOS (native arm64 on macos-14, native x64 on macos-13)
-          - os: macos-14
-            arch: arm64
-          - os: macos-13
-            arch: x64
-          # Linux (native x64 + native arm64 runner)
-          - os: ubuntu-latest
-            arch: x64
-          - os: ubuntu-24.04-arm
-            arch: arm64
+        arch: [x64, arm64]
     steps:
       - uses: actions/checkout@v6
 
@@ -50,7 +35,7 @@ jobs:
       - name: Upload prebuilds
         uses: actions/upload-artifact@v4
         with:
-          name: prebuilds-${{ matrix.os }}-${{ matrix.arch }}
+          name: prebuilds-${{ matrix.arch }}
           path: prebuilds/
           retention-days: 1
 

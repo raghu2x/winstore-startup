@@ -27,13 +27,13 @@
     "index.d.ts",
     "startup_task.cpp",
     "binding.gyp",
-    "lib",
+    "scripts",
     "prebuilds"
   ],
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "install": "node-gyp-build",
+    "install": "node scripts/install.js",
     "prebuild": "prebuildify --napi --strip --name node.napi",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",

@@ -3,7 +3,6 @@
 #include <optional>
 #include <string>
 
-#ifdef _WIN32
 #include <winrt/Windows.ApplicationModel.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
@@ -229,37 +228,6 @@ Napi::Value GetForCurrentPackage(const Napi::CallbackInfo& info) {
 
   return deferred.Promise();
 }
-
-#else
-// Non-Windows stubs (return rejected promises for consistency)
-Napi::Value Enable(const Napi::CallbackInfo& info) {
-  auto env = info.Env();
-  auto deferred = Napi::Promise::Deferred::New(env);
-  deferred.Reject(Napi::Error::New(env, "Not supported on this platform").Value());
-  return deferred.Promise();
-}
-
-Napi::Value Disable(const Napi::CallbackInfo& info) {
-  auto env = info.Env();
-  auto deferred = Napi::Promise::Deferred::New(env);
-  deferred.Reject(Napi::Error::New(env, "Not supported on this platform").Value());
-  return deferred.Promise();
-}
-
-Napi::Value GetState(const Napi::CallbackInfo& info) {
-  auto env = info.Env();
-  auto deferred = Napi::Promise::Deferred::New(env);
-  deferred.Reject(Napi::Error::New(env, "Not supported on this platform").Value());
-  return deferred.Promise();
-}
-
-Napi::Value GetForCurrentPackage(const Napi::CallbackInfo& info) {
-  auto env = info.Env();
-  auto deferred = Napi::Promise::Deferred::New(env);
-  deferred.Resolve(Napi::Array::New(env, 0));
-  return deferred.Promise();
-}
-#endif
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("enable", Napi::Function::New(env, Enable));

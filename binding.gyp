@@ -22,9 +22,7 @@
             "libraries": ["windowsapp.lib"]
           },
           {
-            "sources": ["startup_task.cpp"],
-            "defines": ["NODE_ADDON_API_DISABLE_CPP_EXCEPTIONS"],
-            "cflags_cc!": ["-fno-exceptions"]
+            "type": "none"
           }
         ]
       ]
