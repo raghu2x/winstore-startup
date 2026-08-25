@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aspect-dev/winstore-startup.git"
+    "url": "git+https://github.com/raghu2x/winstore-startup.git"
   },
   "files": [
     "index.js",

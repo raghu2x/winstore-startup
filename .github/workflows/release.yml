@@ -52,7 +52,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
           cache: npm
 
@@ -66,10 +66,19 @@ jobs:
           path: prebuilds/
           merge-multiple: true
 
+      # Trusted publishing (OIDC) needs npm >= 11.5.1; fail loudly if a runner
+      # change ever drops below it, rather than silently falling back to a token.
+      - name: Verify npm supports trusted publishing
+        run: |
+          NPM_VERSION="$(npm -v)"
+          echo "npm $NPM_VERSION"
+          npx --yes semver -r ">=11.5.1" "$NPM_VERSION" >/dev/null || {
+            echo "npm $NPM_VERSION is too old for trusted publishing (need >=11.5.1)"
+            exit 1
+          }
+
       - name: Publish to npm
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
